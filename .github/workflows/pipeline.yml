@@ -1,60 +1,62 @@
-name: CI Checks
- 
+name: Chapter 3 Checks
+
 on:
   push:
-    branches: 
-       # We will only run this CI process when a change is made to the main branch.                                 
+    branches: # <1>
       - main
-     
-jobs:                                                        
-  build:
-    #These are the various stages that are run in our pipeline.
-    name: Build App
-    runs-on: 
-      #Run this on a Linux-based machine.
-      ubuntu-latest                                   
+defaults: # DO NOT INCLUDE
+  run:
+    working-directory: ./ch3
+jobs:
+  test:
+    name: Test Application
+    runs-on: ubuntu-latest # <2>
     steps:
- 
-    - name: Set up Go 1.x                   
-                
+    - name: Set up Go 1.x 
       uses: actions/setup-go@v2
       with:
-        go-version: ^1.18
-           #Ensures that our image has Go 1.18 or higher  
- 
-        
-    - name: Check out code into the Go module directory      
+        go-version: ^1.16
+    - name: Check out code into the Go module directory 
       uses: actions/checkout@v2
-      #Pulls code from a local repository
- 
-    - name: Build
-      run: make build        
-      #Tells our build command to build a binary
+    - name: Run Test
+      run: make test # <1>
+    - name: Coverage Check
+      run: make coverage # <2>
+    - name: Generate Report
+      run: make report # <3>
+    - name: Copy Files 
+      run: |
+           mkdir  reports
+           cp cover.html reports/.
 
-                                
- 
-    - name: Copy Files                                       
+    - name: Archive # <4>
+      uses: actions/upload-artifact@v2
+      with:
+          name: reports
+          path: ch3/reports  # Do not include ch3
+  build:
+    name: Build App
+    runs-on: ubuntu-latest #
+    needs: test #<6>
+    steps:
+    - name: Set up Go 1.x #
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.16
+
+    - name: Check out code into the Go module directory #
+      uses: actions/checkout@v2
+
+    - name: Build
+      run: make build #
+
+    - name: Copy Files #
       run: |
            mkdir  artifacts
            cp api artifacts/.
-      #Copies the resulting binary to a directory to upload
- 
-    - name: Archive                   
-    #Creates an archive to be attached to the workflow with the binary                       
+
+    - name: Archive #
       uses: actions/upload-artifact@v2
       with:
-          name: api                
-          #Names the binary directory something you will be able to identify it with                          
-          path: artifacts
-
-          
-          
-# Set up Go.
-
-# Check out the code.
-
-# Build a binary.
-
-# Copy the file to the upload directory.
-
-# Upload the artifact to GitHub.
+          name: api #
+          path: devOps00Boots/artifacts  # Do not include ch3
