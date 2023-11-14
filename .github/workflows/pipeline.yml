@@ -2,34 +2,49 @@ name: CI Checks
  
 on:
   push:
-    branches:                                                
+    branches: 
+       # We will only run this CI process when a change is made to the main branch.                                 
       - main
+     
 jobs:                                                        
   build:
+    #These are the various stages that are run in our pipeline.
     name: Build App
-    runs-on: ubuntu-latest                                   
+    runs-on: 
+      #Run this on a Linux-based machine.
+      ubuntu-latest                                   
     steps:
  
-    - name: Set up Go 1.x                                    
+    - name: Set up Go 1.x                   
+                
       uses: actions/setup-go@v2
       with:
         go-version: ^1.18
+           #Ensures that our image has Go 1.18 or higher  
  
+        
     - name: Check out code into the Go module directory      
       uses: actions/checkout@v2
+      #Pulls code from a local repository
  
     - name: Build
-      run: make build                                        
+      run: make build        
+      #Tells our build command to build a binary
+
+                                
  
     - name: Copy Files                                       
       run: |
            mkdir  artifacts
            cp api artifacts/.
+      #Copies the resulting binary to a directory to upload
  
-    - name: Archive                                          
+    - name: Archive                   
+    #Creates an archive to be attached to the workflow with the binary                       
       uses: actions/upload-artifact@v2
       with:
-          name: api                                          
+          name: api                
+          #Names the binary directory something you will be able to identify it with                          
           path: artifacts
 
           

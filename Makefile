@@ -21,7 +21,7 @@ upgrade-go: # <5>
 
 build:
 	go build -o api cmd/main.go
-
+#The make build command will compile the main application into a binary named api.
 test:
 	go test ./... -coverprofile=coverage.out
 
