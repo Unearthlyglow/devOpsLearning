@@ -1,6 +1,10 @@
+# (*): Additional Information Needed 
+
 # Feedback Tool(*)
 Feedback Tool is an application used to obtain and 
 receive feedback 
+
+
 
 
 # Dependencies(*)
@@ -17,10 +21,10 @@ To install the required version of Go and any other application dependencies run
  
 ## Release Milestones
  
-### V0 (1 day)
-- [ ] Task
-- [ ] Task
-- [ ] Task
+### V0 (0 day)
+- [ ] Makefile Update
+- [ ] pipeline.yml Update
+- [ ] Task 
 - [ ] Task
  
 ### V1 (7 days)
