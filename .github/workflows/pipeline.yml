@@ -1,12 +1,10 @@
-name: Chapter 3 Checks
+
 
 on:
   push:
     branches: # <1>
       - main
-defaults: # DO NOT INCLUDE
-  run:
-    working-directory: ./ch3
+
 jobs:
   test:
     name: Test Application
@@ -33,7 +31,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: reports
-          path: ch3/reports  # Do not include ch3
+          path: /reports  
   build:
     name: Build App
     runs-on: ubuntu-latest #
@@ -59,4 +57,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: api #
-          path: devOps00Boots/artifacts  # Do not include ch3
+          path: /artifacts  
