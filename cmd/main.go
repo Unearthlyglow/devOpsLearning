@@ -22,3 +22,6 @@ func main() {
 	log.Fatal(http.ListenAndServe(addr, mux))
 	//Runs the server and logs if it fails
 }
+
+
+//Mux is a server router
