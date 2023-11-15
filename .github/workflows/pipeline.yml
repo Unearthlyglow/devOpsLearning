@@ -28,7 +28,7 @@ on:
       with:
         name: reports
         path: ./reports
-  deliver:
+deploy:
     name: Release
     needs: build
     runs-on: ubuntu-latest
