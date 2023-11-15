@@ -61,7 +61,6 @@ jobs:
     name: Release
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -92,6 +91,6 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
         asset_path: api
         asset_name: api
-        asset_content_type: application/octet-stream
+        asset_content_type: application/octet-stream #The content type is a binary, so we need to define this as an octet stream so that it can be recognized by GitHub.
 
         
