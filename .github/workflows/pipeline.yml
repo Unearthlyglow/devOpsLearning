@@ -85,7 +85,7 @@ jobs:
         draft: false
         prerelease: false
     - name: Upload Release Binary
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v1      
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -100,9 +100,10 @@ jobs:
         name: translate                                        
         entry_point: Translate                                 
         runtime: go116
-        credentials: ${{ secrets.gcp_credentials }}            
+        # credentaials: ${{ secrets.gcp_credentials }}            
     - id: test
       run: curl "${{ steps.deploy.outputs.url }}/hello"        
-#Stopping at Listing 4.3 pipeline.yml, 11/15/23: 3:20. YML File for Google Cloud deployment isn't work yet...
+#Stopping at Listing 4.3 pipeline.yml, 11/15/23: 3:20. YML File for Google Cloud deployment isn't working yet. 
+#Issue looks to have to do with the 'credentials" keyword on line 103.....'
 
 
