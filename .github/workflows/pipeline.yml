@@ -94,14 +94,4 @@ jobs:
         asset_name: api
         asset_content_type: application/octet-stream
 
-        - name: Upload Release Binary
-            uses: actions/upload-release-asset@v1
-            env:
-                GITHUB_TOKEN:
-                  ${{ secrets.GITHUB_TOKEN }}
-            with:
-                upload_url:
-                  ${{ steps.create_release.outputs.upload_url }}   ❽
-            asset_path: api
-            asset_name: api
-            asset_content_type: application/octet-stream           ❾
+        
