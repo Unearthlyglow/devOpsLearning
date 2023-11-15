@@ -78,7 +78,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
         # tag_name: ${{ github.ref }}
-        tag_name: 1.0
+        tag_name: 1.0 #hard coded the reference....
         release_name: Release ${{ github.ref }}
         body: |
           ${{ steps.Changelog.outputs.changelog }}
@@ -93,5 +93,16 @@ jobs:
         asset_path: api
         asset_name: api
         asset_content_type: application/octet-stream #The content type is a binary, so we need to define this as an octet stream so that it can be recognized by GitHub.
+    - name: Deploy function
+      id: deploy
+      uses: google-github-actions/deploy-cloud-functions@main
+      with:
+        name: translate                                        
+        entry_point: Translate                                 
+        runtime: go116
+        credentials: ${{ secrets.gcp_credentials }}            
+    - id: test
+      run: curl "${{ steps.deploy.outputs.url }}/hello"        
+#Stopping at Listing 4.3 pipeline.yml, 11/15/23: 3:20. YML File for Google Cloud deployment isn't work yet...
 
-        
+
