@@ -95,13 +95,15 @@ jobs:
         asset_content_type: application/octet-stream #The content type is a binary, so we need to define this as an octet stream so that it can be recognized by GitHub.
     - name: Deploy function
       id: deploy
-      uses: google-github-actions/deploy-cloud-functions@main
+      uses: google-github-actions/deploy-cloud-functions@main 
+      env:
+          GITHUB_TOKEN: ${{ secrets.gcp_credentials }}
       with:
         name: translate                                        
         entry_point: Translate                                 
         runtime: go116
-        project_id: Translator
-        #  credentaials: ${{ secrets.gcp_credentials }}            
+        project_id: "Translator"
+        # credentaials: ${{ secrets.gcp_credentials }}            
     - id: test
       run: curl "${{ steps.deploy.outputs.url }}/hello"        
 #Stopping at Listing 4.3 pipeline.yml, 11/15/23: 3:20. YML File for Google Cloud deployment isn't working yet. 
