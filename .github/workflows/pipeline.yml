@@ -78,7 +78,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
         # tag_name: ${{ github.ref }}
-        tag_name: 1.0 #hard coded the reference....
+        tag_name: 1.1 #hard coded the reference....
         release_name: Release ${{ github.ref }}
         body: |
           ${{ steps.Changelog.outputs.changelog }}
@@ -100,10 +100,12 @@ jobs:
         name: translate                                        
         entry_point: Translate                                 
         runtime: go116
-        # credentaials: ${{ secrets.gcp_credentials }}            
+        #  credentaials: ${{ secrets.gcp_credentials }}            
     - id: test
       run: curl "${{ steps.deploy.outputs.url }}/hello"        
 #Stopping at Listing 4.3 pipeline.yml, 11/15/23: 3:20. YML File for Google Cloud deployment isn't working yet. 
 #Issue looks to have to do with the 'credentials" keyword on line 103.....'
+
+
 
 
