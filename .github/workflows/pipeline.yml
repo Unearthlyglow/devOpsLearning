@@ -96,7 +96,7 @@ jobs:
       id: deploy
       uses: google-github-actions/deploy-cloud-functions@main 
       env:
-          GITHUB_TOKEN: ${{ secrets.gcp_credentials }}
+          credentials: ${{ secrets.gcp_credentials }}
       with:
         name: translate                                        
         entry_point: Translate                                 
